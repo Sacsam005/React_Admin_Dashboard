@@ -18,7 +18,7 @@ const TransactionDataTable = ({ onRowClick, tableRows }) => {
     "Product",
     "Customer",
     "Date",
-    "Amount",
+    "Price",
     "Payment Method",
     "Status",
   ];
@@ -66,7 +66,7 @@ const TransactionDataTable = ({ onRowClick, tableRows }) => {
                   {row.date}
                 </TableCell>
                 <TableCell className="table_cell" sx={{ p: 1 }}>
-                  ${row.amount}
+                  ${row.price}
                 </TableCell>
                 <TableCell className="table_cell" sx={{ p: 1 }}>
                   {row.method}

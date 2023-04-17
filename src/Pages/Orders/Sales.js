@@ -42,7 +42,7 @@ const Sales = () => {
   }).length;
 
   const totalDeliveredOrder = transactionTableData.filter((data) => {
-    return (data.status = "Delivered");
+    return data.status === "Delivered";
   }).length;
 
   const totalCashPaymentOrder = transactionTableData.filter((data) => {

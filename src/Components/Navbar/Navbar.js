@@ -10,9 +10,11 @@ import ChatBubbleOutlineOutlinedIcon from "@mui/icons-material/ChatBubbleOutline
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import CloseIcon from "@mui/icons-material/Close";
 import "./Navbar.sass";
+import { transactionTableData } from "../Chart&Table/TransactionData";
+import SearchedItems from "../../Reusable Components/SearchedItems";
 
 const Navbar = () => {
-  const { handleDarkMode } = useContext(ThemeContext);
+  const { darkMode, blueColorMode, handleDarkMode } = useContext(ThemeContext);
   const { userName, profilePic } = useContext(ProfileContext);
   const [menu, setMenu] = useState(false);
   const [readNotification, setReadNotification] = useState(false);
@@ -20,18 +22,8 @@ const Navbar = () => {
   const [profileMenu, setProfileMenu] = useState(false);
   const [profile, setProfile] = useState(false);
   const [popup, setPopup] = useState(false);
-  // const [userName, setUserName] = useState("");
-  // const [profilePic, setProfilePic] = useState(null);
-  // useEffect(() => {
-  //   const storedUserName = localStorage.getItem("userName");
-  //   setUserName(
-  //     `${storedUserName.charAt(0).toUpperCase() + storedUserName.substring(1)}`
-  //   );
-  //   const storedPic = localStorage.getItem("profilePic");
-  //   if (storedPic) {
-  //     setProfilePic(storedPic);
-  //   }
-  // }, [userName, profilePic]);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchData, setSearchData] = useState(transactionTableData);
 
   // Handle hamburger menu display for med and small devices
   function handleMenu() {
@@ -107,6 +99,25 @@ const Navbar = () => {
     localStorage.setItem("popupShown", true);
   }
 
+  // Handle search
+  function handleSearch(e) {
+    setSearchQuery(e.target.value);
+  }
+
+  useEffect(() => {
+    const filteredData = transactionTableData.filter((transactionData) => {
+      return Object.values(transactionData).some((value) => {
+        return (
+          (typeof value === "string" &&
+            value.toLowerCase().includes(searchQuery.toLowerCase())) ||
+          (typeof value === "number" &&
+            value.toString().toLowerCase().includes(searchQuery.toLowerCase()))
+        );
+      });
+    });
+    setSearchData(filteredData);
+  }, [searchQuery]);
+
   // --------------------------------------------------------------------------
   return (
     <>
@@ -130,8 +141,35 @@ const Navbar = () => {
               type="text"
               placeholder="Search..."
               className="search_input"
+              onChange={handleSearch}
             />
             <SearchIcon />
+          </div>
+          <div
+            className="searched_items_div_container"
+            style={{
+              backgroundColor: darkMode
+                ? "#3c3b3f"
+                : blueColorMode
+                ? "0B4E91"
+                : "#eee",
+            }}
+          >
+            {searchQuery && searchData.length
+              ? searchData.map((data) => (
+                  <SearchedItems
+                    key={data.id}
+                    link="/orders/sales"
+                    id={data.id}
+                    product={data.product}
+                    img={data.img}
+                    customer={data.customer}
+                    date={data.date}
+                    price={data.price}
+                    status={data.status}
+                  />
+                ))
+              : ""}
           </div>
           <div className="items_div_wrapper">
             <div className="items_div">

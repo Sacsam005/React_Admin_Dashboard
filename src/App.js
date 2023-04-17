@@ -9,6 +9,7 @@ import AddProducts from "./Pages/Products/AddProducts";
 import Orders from "./Pages/Orders/Orders";
 import Logout from "./Pages/Logout/Logout";
 import Sales from "./Pages/Orders/Sales";
+import PageNotFound from "./Pages/PageNotFound/PageNotFound";
 import "./App.sass";
 
 // Context for the theme settings and the functions to handle them
@@ -143,7 +144,7 @@ function App() {
                       <Route index element={<Products />} />
                       <Route path="/products/new" element={<AddProducts />} />
                     </Route>
-                    <Route path="*" element={<Login />} />
+                    <Route path="*" element={<PageNotFound />} />
                   </Route>
                 </Routes>
               </BrowserRouter>

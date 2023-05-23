@@ -20,4 +20,3 @@ The dashboard uses various React hooks and dependencies, including:
 ##### Developer's Note
 
 - The code can be further refactored to improve its efficiency and maintainability.
-- Searchbar does not work.

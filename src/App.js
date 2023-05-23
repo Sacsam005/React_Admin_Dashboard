@@ -92,9 +92,22 @@ function App() {
     };
     window.addEventListener("profileUpdated", handleProfileUpdated);
 
+    // Add an event listener to update the local storage values when the google profile is updated
+    const handleGoolgeProfileUpdated = (event) => {
+      localStorage.setItem("userName", event.detail.googleUserName);
+      localStorage.setItem("profilePic", event.detail.googleProfilePic);
+      setUserName(event.detail.googleUserName);
+      setProfilePic(event.detail.googleProfilePic);
+    };
+    window.addEventListener("googleProfileUpdated", handleGoolgeProfileUpdated);
+
     // Cleanup the event listener when the component unmounts
     return () => {
       window.removeEventListener("profileUpdated", handleProfileUpdated);
+      window.removeEventListener(
+        "googleProfileUpdated",
+        handleGoolgeProfileUpdated
+      );
     };
   }, []);
 

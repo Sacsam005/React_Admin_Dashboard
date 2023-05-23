@@ -76,7 +76,7 @@ const AddProducts = () => {
         return (
           <div className="cell_action_div">
             <Link
-              to="/users/test"
+              to="/users"
               style={{ textDecoration: "none", color: "unset" }}
             >
               <div className="view_btn">View</div>

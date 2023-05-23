@@ -72,7 +72,7 @@ const AddUsers = () => {
         return (
           <div className="cell_action_div">
             <Link
-              to="/users/test"
+              to="/users"
               style={{ textDecoration: "none", color: "unset" }}
               className="view_btn"
             >

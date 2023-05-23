@@ -89,6 +89,7 @@ const Login = (props) => {
       theme: "outline",
       size: "large",
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
